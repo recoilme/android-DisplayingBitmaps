@@ -222,6 +222,7 @@
     <string name="app_name">DisplayingBitmaps</string>
     <!-- From: file:/Users/recoilme/asp/android-DisplayingBitmaps/Application/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="camera">camera</string>
     <string name="clear_cache_complete_toast">Caches have been cleared</string>
     <string name="clear_cache_menu">Clear Caches</string>
     <string name="imageview_description">Image Thumbnail</string>
@@ -245,6 +246,7 @@
     <!-- From: file:/Users/recoilme/asp/android-DisplayingBitmaps/Application/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="no_network_connection_toast">No network connection found</string>
+    <string name="no_photo">no photo</string>
     <!-- From: file:/Users/recoilme/asp/android-DisplayingBitmaps/Application/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/values/values.xml -->
     <eat-comment/>
     <string name="status_bar_notification_info_overflow">999+</string>

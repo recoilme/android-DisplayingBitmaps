@@ -247,12 +247,15 @@ public class ImageResizer extends ImageWorker {
                 inSampleSize *= 2;
             }
 
+            // И эти люди учат меня программировать???
+            //TODO wrong aspect ratio
+
             // This offers some additional logic in case the image has a strange
             // aspect ratio. For example, a panorama may have a much larger
             // width than height. In these cases the total pixels might still
             // end up being too large to fit comfortably in memory, so we should
             // be more aggressive with sample down the image (=larger inSampleSize).
-
+            /*
             long totalPixels = width * height / inSampleSize;
 
             // Anything more than 2x the requested pixels we'll sample down further
@@ -262,6 +265,7 @@ public class ImageResizer extends ImageWorker {
                 inSampleSize *= 2;
                 totalPixels /= 2;
             }
+            */
         }
         return inSampleSize;
         // END_INCLUDE (calculate_sample_size)

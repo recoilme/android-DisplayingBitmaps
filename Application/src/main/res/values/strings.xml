@@ -21,5 +21,7 @@
     <string name="clear_cache_complete_toast">Caches have been cleared</string>
     <string name="imageview_description">Image Thumbnail</string>
     <string name="no_network_connection_toast">No network connection found</string>
+    <string name="camera">camera</string>
+    <string name="no_photo">no photo</string>
 
 </resources>

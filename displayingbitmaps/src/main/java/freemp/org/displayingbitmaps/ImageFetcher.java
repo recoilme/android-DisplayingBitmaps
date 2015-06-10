@@ -190,6 +190,7 @@ public class ImageFetcher extends ImageResizer {
         FileDescriptor fileDescriptor = null;
         FileInputStream fileInputStream = null;
         DiskLruCache.Snapshot snapshot;
+
         synchronized (mHttpDiskCacheLock) {
             // Wait for disk cache to initialize
             while (mHttpDiskCacheStarting) {
@@ -200,26 +201,32 @@ public class ImageFetcher extends ImageResizer {
 
             if (mHttpDiskCache != null) {
                 try {
-                    snapshot = mHttpDiskCache.get(key);
-                    if (snapshot == null) {
-                        if (BuildConfig.DEBUG) {
-                            Log.d(TAG, "processBitmap, not found in http cache, downloading...");
-                        }
-                        DiskLruCache.Editor editor = mHttpDiskCache.edit(key);
-                        if (editor != null) {
-                            if (downloadUrlToStream(data,
-                                    editor.newOutputStream(DISK_CACHE_INDEX))) {
-                                editor.commit();
-                            } else {
-                                editor.abort();
-                            }
-                        }
-                        snapshot = mHttpDiskCache.get(key);
-                    }
-                    if (snapshot != null) {
-                        fileInputStream =
-                                (FileInputStream) snapshot.getInputStream(DISK_CACHE_INDEX);
+                    if (new File(data).exists()) {
+                        fileInputStream = new FileInputStream(new File(data));
                         fileDescriptor = fileInputStream.getFD();
+                    }
+                    else {
+                        snapshot = mHttpDiskCache.get(key);
+                        if (snapshot == null) {
+                            if (BuildConfig.DEBUG) {
+                                Log.d(TAG, "processBitmap, not found in http cache, downloading...");
+                            }
+                            DiskLruCache.Editor editor = mHttpDiskCache.edit(key);
+                            if (editor != null) {
+                                if (downloadUrlToStream(data,
+                                        editor.newOutputStream(DISK_CACHE_INDEX))) {
+                                    editor.commit();
+                                } else {
+                                    editor.abort();
+                                }
+                            }
+                            snapshot = mHttpDiskCache.get(key);
+                        }
+                        if (snapshot != null) {
+                            fileInputStream =
+                                    (FileInputStream) snapshot.getInputStream(DISK_CACHE_INDEX);
+                            fileDescriptor = fileInputStream.getFD();
+                        }
                     }
                 } catch (IOException e) {
                     Log.e(TAG, "processBitmap - " + e);

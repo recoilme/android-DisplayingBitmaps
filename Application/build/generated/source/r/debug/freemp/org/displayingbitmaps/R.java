@@ -586,14 +586,13 @@ public final class R {
 		public static final int abc_shareactionprovider_share_with = 0x7f05000b;
 		public static final int abc_shareactionprovider_share_with_application = 0x7f05000c;
 		public static final int abc_toolbar_collapse_description = 0x7f050010;
-		public static final int status_bar_notification_info_overflow = 0x7f050017;
+		public static final int status_bar_notification_info_overflow = 0x7f050019;
 	}
 	public static final class style {
 		public static final int AlertDialog_AppCompat = 0x7f070078;
 		public static final int AlertDialog_AppCompat_Light = 0x7f070079;
 		public static final int Animation_AppCompat_Dialog = 0x7f07007a;
 		public static final int Animation_AppCompat_DropDownUp = 0x7f07007b;
-		public static final int AppTheme = 0x7f07007c;
 		public static final int Base_AlertDialog_AppCompat = 0x7f07007d;
 		public static final int Base_AlertDialog_AppCompat_Light = 0x7f07007e;
 		public static final int Base_Animation_AppCompat_Dialog = 0x7f07007f;

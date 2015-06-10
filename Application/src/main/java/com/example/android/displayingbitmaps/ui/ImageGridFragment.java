@@ -17,11 +17,15 @@
 package com.example.android.displayingbitmaps.ui;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -40,9 +44,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.android.common.logger.Log;
+import com.example.android.displayingbitmaps.App;
 import com.example.android.displayingbitmaps.BuildConfig;
 import com.example.android.displayingbitmaps.R;
 import com.example.android.displayingbitmaps.provider.Images;
+
+import java.util.ArrayList;
 
 import freemp.org.displayingbitmaps.ImageCache;
 import freemp.org.displayingbitmaps.ImageFetcher;
@@ -64,6 +71,9 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
     private ImageAdapter mAdapter;
     private ImageFetcher mImageFetcher;
 
+    private ArrayList<String> listOfAllImages;
+    private GridView mGridView;
+
     /**
      * Empty constructor as per the Fragment documentation
      */
@@ -77,7 +87,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
         mImageThumbSize = getResources().getDimensionPixelSize(R.dimen.image_thumbnail_size);
         mImageThumbSpacing = getResources().getDimensionPixelSize(R.dimen.image_thumbnail_spacing);
 
-        mAdapter = new ImageAdapter(getActivity());
+        mAdapter = new ImageAdapter(getActivity(),((App) getActivity().getApplicationContext()).listOfAllImages);//Images.imageThumbUrls);
 
         ImageCache.ImageCacheParams cacheParams =
                 new ImageCache.ImageCacheParams(getActivity(), IMAGE_CACHE_DIR);
@@ -88,6 +98,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
         mImageFetcher = new ImageFetcher(getActivity(), mImageThumbSize);
         mImageFetcher.setLoadingImage(R.drawable.empty_photo);
         mImageFetcher.addImageCache(getActivity().getSupportFragmentManager(), cacheParams);
+
     }
 
     @Override
@@ -95,7 +106,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         final View v = inflater.inflate(R.layout.image_grid_fragment, container, false);
-        final GridView mGridView = (GridView) v.findViewById(R.id.gridView);
+        mGridView = (GridView) v.findViewById(R.id.gridView);
         mGridView.setAdapter(mAdapter);
         mGridView.setOnItemClickListener(this);
         mGridView.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -122,6 +133,8 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
         // number of columns and the width of each column. The width of each column is variable
         // as the GridView has stretchMode=columnWidth. The column width is used to set the height
         // of each view so we get nice square thumbnails.
+
+        // Поделить ширину экрана на количество колонок без триобсёрвера не судьба было??
         mGridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @TargetApi(VERSION_CODES.JELLY_BEAN)
@@ -204,6 +217,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
                 Toast.makeText(getActivity(), R.string.clear_cache_complete_toast,
                         Toast.LENGTH_SHORT).show();
                 return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -220,10 +234,12 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
         private int mNumColumns = 0;
         private int mActionBarHeight = 0;
         private GridView.LayoutParams mImageViewLayoutParams;
+        private String[] data;
 
-        public ImageAdapter(Context context) {
+        public ImageAdapter(Context context, String[] array) {
             super();
             mContext = context;
+            data = array;
             mImageViewLayoutParams = new GridView.LayoutParams(
                     LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
             // Calculate ActionBar height
@@ -243,13 +259,13 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
             }
 
             // Size + number of columns for top empty row
-            return Images.imageThumbUrls.length + mNumColumns;
+            return data.length + mNumColumns;
         }
 
         @Override
         public Object getItem(int position) {
             return position < mNumColumns ?
-                    null : Images.imageThumbUrls[position - mNumColumns];
+                    null : data[position - mNumColumns];
         }
 
         @Override
@@ -304,7 +320,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
 
             // Finally load the image asynchronously into the ImageView, this also takes care of
             // setting a placeholder image while the background thread runs
-            mImageFetcher.loadImage(Images.imageThumbUrls[position - mNumColumns], imageView);
+            mImageFetcher.loadImage(data[position - mNumColumns], imageView);
             return imageView;
             //END_INCLUDE(load_gridview_item)
         }
@@ -334,4 +350,6 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
             return mNumColumns;
         }
     }
+
+
 }

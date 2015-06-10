@@ -18,8 +18,12 @@ package com.example.android.displayingbitmaps.ui;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
+import android.app.Activity;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -34,9 +38,12 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager.LayoutParams;
 import android.widget.Toast;
 
+import com.example.android.displayingbitmaps.App;
 import com.example.android.displayingbitmaps.BuildConfig;
 import com.example.android.displayingbitmaps.R;
 import com.example.android.displayingbitmaps.provider.Images;
+
+import java.util.ArrayList;
 
 import freemp.org.displayingbitmaps.ImageCache;
 import freemp.org.displayingbitmaps.ImageFetcher;
@@ -81,7 +88,7 @@ public class ImageDetailActivity extends FragmentActivity implements OnClickList
         mImageFetcher.setImageFadeIn(false);
 
         // Set up ViewPager and backing adapter
-        mAdapter = new ImagePagerAdapter(getSupportFragmentManager(), Images.imageUrls.length);
+        mAdapter = new ImagePagerAdapter(getSupportFragmentManager(), ((App) getApplicationContext()).listOfAllImages);
         mPager = (ViewPager) findViewById(R.id.pager);
         mPager.setAdapter(mAdapter);
         mPager.setPageMargin((int) getResources().getDimension(R.dimen.horizontal_page_margin));
@@ -122,6 +129,7 @@ public class ImageDetailActivity extends FragmentActivity implements OnClickList
         if (extraCurrentItem != -1) {
             mPager.setCurrentItem(extraCurrentItem);
         }
+
     }
 
     @Override
@@ -154,6 +162,7 @@ public class ImageDetailActivity extends FragmentActivity implements OnClickList
                 Toast.makeText(
                         this, R.string.clear_cache_complete_toast,Toast.LENGTH_SHORT).show();
                 return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -178,10 +187,12 @@ public class ImageDetailActivity extends FragmentActivity implements OnClickList
      */
     private class ImagePagerAdapter extends FragmentStatePagerAdapter {
         private final int mSize;
+        private final String[] array;
 
-        public ImagePagerAdapter(FragmentManager fm, int size) {
+        public ImagePagerAdapter(FragmentManager fm, String[] array) {
             super(fm);
-            mSize = size;
+            mSize = array.length;
+            this.array = array;
         }
 
         @Override
@@ -191,7 +202,7 @@ public class ImageDetailActivity extends FragmentActivity implements OnClickList
 
         @Override
         public Fragment getItem(int position) {
-            return ImageDetailFragment.newInstance(Images.imageUrls[position]);
+            return ImageDetailFragment.newInstance(array[position]);
         }
     }
 
@@ -209,4 +220,6 @@ public class ImageDetailActivity extends FragmentActivity implements OnClickList
             mPager.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
         }
     }
+
+
 }

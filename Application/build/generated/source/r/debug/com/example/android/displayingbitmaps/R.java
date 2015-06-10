@@ -1707,12 +1707,14 @@ containing a value of this type.
         public static final int abc_shareactionprovider_share_with_application=0x7f05000c;
         public static final int abc_toolbar_collapse_description=0x7f050010;
         public static final int app_name=0x7f050011;
-        public static final int clear_cache_complete_toast=0x7f050012;
-        public static final int clear_cache_menu=0x7f050013;
-        public static final int imageview_description=0x7f050014;
-        public static final int intro_message=0x7f050015;
-        public static final int no_network_connection_toast=0x7f050016;
-        public static final int status_bar_notification_info_overflow=0x7f050017;
+        public static final int camera=0x7f050012;
+        public static final int clear_cache_complete_toast=0x7f050013;
+        public static final int clear_cache_menu=0x7f050014;
+        public static final int imageview_description=0x7f050015;
+        public static final int intro_message=0x7f050016;
+        public static final int no_network_connection_toast=0x7f050017;
+        public static final int no_photo=0x7f050018;
+        public static final int status_bar_notification_info_overflow=0x7f050019;
     }
     public static final class style {
         public static final int AlertDialog_AppCompat=0x7f070078;
