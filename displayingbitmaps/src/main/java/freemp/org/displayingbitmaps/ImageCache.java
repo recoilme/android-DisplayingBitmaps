@@ -30,6 +30,7 @@ import android.os.StatFs;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.util.LruCache;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.File;
@@ -549,16 +550,25 @@ public class ImageCache {
      * @return The cache dir
      */
     public static File getDiskCacheDir(Context context, String uniqueName) {
-        // Check if media is mounted or storage is built-in, if so, try and use external cache dir
-        // otherwise use internal cache dir
-        final String cachePath = context.getFilesDir().toString();
-                //not working on note 3
-                /*
-                Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) ||
-                        !isExternalStorageRemovable() ? getExternalCacheDir(context).getPath() :
-                                context.getCacheDir().getPath();
-                */
-        return new File(cachePath + File.separator + uniqueName);
+        String cachePath = "";
+        //dirty workaround for null in getFilesDir
+        if (context.getFilesDir()==null) {
+            if (context.getCacheDir() == null) {
+                cachePath = context.getExternalCacheDir().toString();
+            }
+            else {
+                cachePath = context.getCacheDir().toString();
+            }
+        }
+        else {
+            cachePath = context.getFilesDir().toString();
+        }
+        if (TextUtils.equals(uniqueName,"")) {
+            return new File(cachePath);
+        }
+        else {
+            return new File(cachePath + File.separator + uniqueName);
+        }
     }
 
     /**
