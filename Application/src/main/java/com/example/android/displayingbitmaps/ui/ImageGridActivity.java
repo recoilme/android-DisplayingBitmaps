@@ -21,7 +21,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 
 import com.example.android.displayingbitmaps.BuildConfig;
-import com.example.android.displayingbitmaps.util.Utils;
+
+import freemp.org.displayingbitmaps.Utils;
 
 /**
  * Simple FragmentActivity to hold the main {@link ImageGridFragment} and not much else.

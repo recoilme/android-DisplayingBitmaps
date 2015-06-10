@@ -22,7 +22,8 @@ import android.graphics.drawable.LayerDrawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.example.android.displayingbitmaps.util.RecyclingBitmapDrawable;
+import freemp.org.displayingbitmaps.RecyclingBitmapDrawable;
+
 
 /**
  * Sub-class of ImageView which automatically notifies the drawable when it is

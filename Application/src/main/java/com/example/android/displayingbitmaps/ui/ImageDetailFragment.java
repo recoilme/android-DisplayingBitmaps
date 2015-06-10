@@ -24,10 +24,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+
 import com.example.android.displayingbitmaps.R;
-import com.example.android.displayingbitmaps.util.ImageFetcher;
-import com.example.android.displayingbitmaps.util.ImageWorker;
-import com.example.android.displayingbitmaps.util.Utils;
+
+import freemp.org.displayingbitmaps.ImageFetcher;
+import freemp.org.displayingbitmaps.ImageWorker;
+import freemp.org.displayingbitmaps.Utils;
 
 /**
  * This fragment will populate the children of the ViewPager from {@link ImageDetailActivity}.

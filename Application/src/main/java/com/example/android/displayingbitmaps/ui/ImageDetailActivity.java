@@ -37,9 +37,10 @@ import android.widget.Toast;
 import com.example.android.displayingbitmaps.BuildConfig;
 import com.example.android.displayingbitmaps.R;
 import com.example.android.displayingbitmaps.provider.Images;
-import com.example.android.displayingbitmaps.util.ImageCache;
-import com.example.android.displayingbitmaps.util.ImageFetcher;
-import com.example.android.displayingbitmaps.util.Utils;
+
+import freemp.org.displayingbitmaps.ImageCache;
+import freemp.org.displayingbitmaps.ImageFetcher;
+import freemp.org.displayingbitmaps.Utils;
 
 public class ImageDetailActivity extends FragmentActivity implements OnClickListener {
     private static final String IMAGE_CACHE_DIR = "images";
