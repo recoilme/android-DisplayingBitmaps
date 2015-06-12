@@ -17,15 +17,11 @@
 package com.example.android.displayingbitmaps.ui;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -47,13 +43,13 @@ import com.example.android.common.logger.Log;
 import com.example.android.displayingbitmaps.App;
 import com.example.android.displayingbitmaps.BuildConfig;
 import com.example.android.displayingbitmaps.R;
-import com.example.android.displayingbitmaps.provider.Images;
 
 import java.util.ArrayList;
 
-import freemp.org.displayingbitmaps.ImageCache;
-import freemp.org.displayingbitmaps.ImageFetcher;
-import freemp.org.displayingbitmaps.Utils;
+import org.freemp.malevich.ImageCache;
+import org.freemp.malevich.ImageFetcher;
+import org.freemp.malevich.Malevich;
+import org.freemp.malevich.Utils;
 
 /**
  * The main fragment that powers the ImageGridActivity screen. Fairly straight forward GridView
@@ -95,9 +91,9 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
         cacheParams.setMemCacheSizePercent(0.25f); // Set memory cache to 25% of app memory
 
         // The ImageFetcher takes care of loading images into our ImageView children asynchronously
-        mImageFetcher = new ImageFetcher(getActivity(), mImageThumbSize);
+        mImageFetcher = new ImageFetcher(getActivity(), mImageThumbSize,true);
         mImageFetcher.setLoadingImage(R.drawable.empty_photo);
-        mImageFetcher.addImageCache(getActivity().getSupportFragmentManager(), cacheParams);
+        mImageFetcher.addImageCache(cacheParams,true);
 
     }
 
@@ -338,7 +334,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
             mItemHeight = height;
             mImageViewLayoutParams =
                     new GridView.LayoutParams(LayoutParams.MATCH_PARENT, mItemHeight);
-            mImageFetcher.setImageSize(height);
+            mImageFetcher.setImageSize(height,true);
             notifyDataSetChanged();
         }
 

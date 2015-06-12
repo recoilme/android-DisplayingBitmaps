@@ -27,9 +27,10 @@ import android.widget.ImageView;
 
 import com.example.android.displayingbitmaps.R;
 
-import freemp.org.displayingbitmaps.ImageFetcher;
-import freemp.org.displayingbitmaps.ImageWorker;
-import freemp.org.displayingbitmaps.Utils;
+import org.freemp.malevich.ImageFetcher;
+import org.freemp.malevich.ImageWorker;
+import org.freemp.malevich.Malevich;
+import org.freemp.malevich.Utils;
 
 /**
  * This fragment will populate the children of the ViewPager from {@link ImageDetailActivity}.

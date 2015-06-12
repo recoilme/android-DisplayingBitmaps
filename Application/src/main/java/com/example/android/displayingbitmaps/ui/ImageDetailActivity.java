@@ -18,12 +18,8 @@ package com.example.android.displayingbitmaps.ui;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;
-import android.app.Activity;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -39,15 +35,11 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.Toast;
 
 import com.example.android.displayingbitmaps.App;
-import com.example.android.displayingbitmaps.BuildConfig;
 import com.example.android.displayingbitmaps.R;
-import com.example.android.displayingbitmaps.provider.Images;
 
-import java.util.ArrayList;
-
-import freemp.org.displayingbitmaps.ImageCache;
-import freemp.org.displayingbitmaps.ImageFetcher;
-import freemp.org.displayingbitmaps.Utils;
+import org.freemp.malevich.ImageCache;
+import org.freemp.malevich.ImageFetcher;
+import org.freemp.malevich.Utils;
 
 public class ImageDetailActivity extends FragmentActivity implements OnClickListener {
     private static final String IMAGE_CACHE_DIR = "images";
@@ -80,12 +72,13 @@ public class ImageDetailActivity extends FragmentActivity implements OnClickList
 
         ImageCache.ImageCacheParams cacheParams =
                 new ImageCache.ImageCacheParams(this, IMAGE_CACHE_DIR);
-        cacheParams.setMemCacheSizePercent(0.25f); // Set memory cache to 25% of app memory
+        cacheParams.setMemCacheSizePercent(0.5f); // Set memory cache to 50% of app memory
 
         // The ImageFetcher takes care of loading images into our ImageView children asynchronously
-        mImageFetcher = new ImageFetcher(this, longest);
-        mImageFetcher.addImageCache(getSupportFragmentManager(), cacheParams);
+        mImageFetcher = new ImageFetcher(this, longest,true);
+        mImageFetcher.addImageCache(cacheParams,true);
         mImageFetcher.setImageFadeIn(false);
+
 
         // Set up ViewPager and backing adapter
         mAdapter = new ImagePagerAdapter(getSupportFragmentManager(), ((App) getApplicationContext()).listOfAllImages);
