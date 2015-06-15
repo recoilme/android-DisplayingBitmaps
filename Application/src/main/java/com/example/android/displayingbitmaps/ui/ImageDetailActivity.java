@@ -39,6 +39,7 @@ import com.example.android.displayingbitmaps.R;
 
 import org.freemp.malevich.ImageCache;
 import org.freemp.malevich.ImageFetcher;
+import org.freemp.malevich.Malevich;
 import org.freemp.malevich.Utils;
 
 public class ImageDetailActivity extends FragmentActivity implements OnClickListener {
@@ -46,7 +47,7 @@ public class ImageDetailActivity extends FragmentActivity implements OnClickList
     public static final String EXTRA_IMAGE = "extra_image";
 
     private ImagePagerAdapter mAdapter;
-    private ImageFetcher mImageFetcher;
+    private Malevich malevich;
     private ViewPager mPager;
 
     @TargetApi(VERSION_CODES.HONEYCOMB)
@@ -68,16 +69,17 @@ public class ImageDetailActivity extends FragmentActivity implements OnClickList
         // resolution that is appropriate for both portrait and landscape. For best image quality
         // we shouldn't divide by 2, but this will use more memory and require a larger memory
         // cache.
-        final int longest = (height > width ? height : width) / 2;
+        //final int longest = (height > width ? height : width) / 2;
 
-        ImageCache.ImageCacheParams cacheParams =
-                new ImageCache.ImageCacheParams(this, IMAGE_CACHE_DIR);
-        cacheParams.setMemCacheSizePercent(0.5f); // Set memory cache to 50% of app memory
+        //ImageCache.ImageCacheParams cacheParams =
+         //       new ImageCache.ImageCacheParams(this, IMAGE_CACHE_DIR);
+        //cacheParams.setMemCacheSizePercent(0.5f); // Set memory cache to 50% of app memory
 
         // The ImageFetcher takes care of loading images into our ImageView children asynchronously
-        mImageFetcher = new ImageFetcher(this, longest,true);
-        mImageFetcher.addImageCache(cacheParams,true);
-        mImageFetcher.setImageFadeIn(false);
+        malevich = new Malevich.Builder(this).cacheDir(IMAGE_CACHE_DIR).build();
+        //mImageFetcher = new ImageFetcher(this, longest,true);
+        //mImageFetcher.addImageCache(cacheParams,true);
+        //mImageFetcher.setImageFadeIn(false);
 
 
         // Set up ViewPager and backing adapter
@@ -128,20 +130,20 @@ public class ImageDetailActivity extends FragmentActivity implements OnClickList
     @Override
     public void onResume() {
         super.onResume();
-        mImageFetcher.setExitTasksEarly(false);
+        malevich.setExitTasksEarly(false);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mImageFetcher.setExitTasksEarly(true);
-        mImageFetcher.flushCache();
+        malevich.setExitTasksEarly(true);
+        malevich.flushCache();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mImageFetcher.closeCache();
+        malevich.closeCache();
     }
 
     @Override
@@ -151,7 +153,7 @@ public class ImageDetailActivity extends FragmentActivity implements OnClickList
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.clear_cache:
-                mImageFetcher.clearCache();
+                malevich.clearCache();
                 Toast.makeText(
                         this, R.string.clear_cache_complete_toast,Toast.LENGTH_SHORT).show();
                 return true;
@@ -169,8 +171,8 @@ public class ImageDetailActivity extends FragmentActivity implements OnClickList
     /**
      * Called by the ViewPager child fragments to load images via the one ImageFetcher
      */
-    public ImageFetcher getImageFetcher() {
-        return mImageFetcher;
+    public Malevich getMalevich() {
+        return malevich;
     }
 
     /**

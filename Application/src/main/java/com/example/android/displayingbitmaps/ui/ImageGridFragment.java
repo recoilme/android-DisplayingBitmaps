@@ -65,7 +65,8 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
     private int mImageThumbSize;
     private int mImageThumbSpacing;
     private ImageAdapter mAdapter;
-    private ImageFetcher mImageFetcher;
+    //private ImageFetcher mImageFetcher;
+    private Malevich malevich;
 
     private ArrayList<String> listOfAllImages;
     private GridView mGridView;
@@ -85,6 +86,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
 
         mAdapter = new ImageAdapter(getActivity(),((App) getActivity().getApplicationContext()).listOfAllImages);//Images.imageThumbUrls);
 
+        /*
         ImageCache.ImageCacheParams cacheParams =
                 new ImageCache.ImageCacheParams(getActivity(), IMAGE_CACHE_DIR);
 
@@ -94,6 +96,9 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
         mImageFetcher = new ImageFetcher(getActivity(), mImageThumbSize,true);
         mImageFetcher.setLoadingImage(R.drawable.empty_photo);
         mImageFetcher.addImageCache(cacheParams,true);
+        */
+
+        malevich = new Malevich.Builder(getActivity()).cacheDir(IMAGE_CACHE_DIR).debug(true).build();
 
     }
 
@@ -112,10 +117,10 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
                 if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
                     // Before Honeycomb pause image loading on scroll to help with performance
                     if (!Utils.hasHoneycomb()) {
-                        mImageFetcher.setPauseWork(true);
+                        malevich.setPauseWork(true);
                     }
                 } else {
-                    mImageFetcher.setPauseWork(false);
+                    malevich.setPauseWork(false);
                 }
             }
 
@@ -130,7 +135,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
         // as the GridView has stretchMode=columnWidth. The column width is used to set the height
         // of each view so we get nice square thumbnails.
 
-        // Поделить ширину экрана на количество колонок без триобсёрвера не судьба было??
+        // Поделить ширину экрана на количество колонок без триобсёрвера не судьба??
         mGridView.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
                     @TargetApi(VERSION_CODES.JELLY_BEAN)
@@ -165,22 +170,22 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
     @Override
     public void onResume() {
         super.onResume();
-        mImageFetcher.setExitTasksEarly(false);
+        malevich.setExitTasksEarly(false);
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mImageFetcher.setPauseWork(false);
-        mImageFetcher.setExitTasksEarly(true);
-        mImageFetcher.flushCache();
+        malevich.setPauseWork(false);
+        malevich.setExitTasksEarly(true);
+        malevich.flushCache();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mImageFetcher.closeCache();
+        malevich.closeCache();
     }
 
     @TargetApi(VERSION_CODES.JELLY_BEAN)
@@ -209,7 +214,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.clear_cache:
-                mImageFetcher.clearCache();
+                malevich.clearCache();
                 Toast.makeText(getActivity(), R.string.clear_cache_complete_toast,
                         Toast.LENGTH_SHORT).show();
                 return true;
@@ -316,7 +321,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
 
             // Finally load the image asynchronously into the ImageView, this also takes care of
             // setting a placeholder image while the background thread runs
-            mImageFetcher.loadImage(data[position - mNumColumns], imageView);
+            malevich.loadImage(data[position - mNumColumns], imageView);
             return imageView;
             //END_INCLUDE(load_gridview_item)
         }
@@ -334,7 +339,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
             mItemHeight = height;
             mImageViewLayoutParams =
                     new GridView.LayoutParams(LayoutParams.MATCH_PARENT, mItemHeight);
-            mImageFetcher.setImageSize(height,true);
+            malevich.setImageSize(height,true);
             notifyDataSetChanged();
         }
 

@@ -7,7 +7,10 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import com.example.android.displayingbitmaps.provider.Images;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by recoilme on 10/06/15.
@@ -19,6 +22,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         ArrayList<String> list = getAllImagesPath(this);
+        list.addAll(Arrays.asList(Images.imageUrls));
         listOfAllImages = list.toArray(new String[list.size()]);
     }
 

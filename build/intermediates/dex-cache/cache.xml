@@ -9,13 +9,6 @@
         <dex dex="/Users/recoilme/asp/android-DisplayingBitmaps/Application/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-24d8332bd55df05b3b8747594e6944caaf5ea290.jar" />
     </item>
     <item
-        jar="/Users/recoilme/asp/android-DisplayingBitmaps/Application/build/intermediates/exploded-aar/android-DisplayingBitmaps/displayingbitmaps/unspecified/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="33f83452ac4e13efb1521ae647054b69e3022b27">
-        <dex dex="/Users/recoilme/asp/android-DisplayingBitmaps/Application/build/intermediates/pre-dexed/debug/classes-aee3bbe839720194bce5adc66759c935ed08f7fd.jar" />
-    </item>
-    <item
         jar="/Users/recoilme/asp/android-DisplayingBitmaps/Application/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
@@ -23,18 +16,25 @@
         <dex dex="/Users/recoilme/asp/android-DisplayingBitmaps/Application/build/intermediates/pre-dexed/debug/classes-64e0984ee00e2a7aec85db2b743e0b8bf6143dff.jar" />
     </item>
     <item
-        jar="/Users/recoilme/asp/android-DisplayingBitmaps/Application/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
-        <dex dex="/Users/recoilme/asp/android-DisplayingBitmaps/Application/build/intermediates/pre-dexed/debug/classes-a0d851e7b8c22b92e418e5d90e9e83b725199ef6.jar" />
-    </item>
-    <item
         jar="/Users/recoilme/asp/android-DisplayingBitmaps/Application/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
         <dex dex="/Users/recoilme/asp/android-DisplayingBitmaps/Application/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-e2013203aba684c3fd28eba5256ffb74afa3cf23.jar" />
+    </item>
+    <item
+        jar="/Users/recoilme/asp/android-DisplayingBitmaps/Application/build/intermediates/exploded-aar/android-DisplayingBitmaps/displayingbitmaps/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e1a76f7b1fcd8595669a8ccdc6d0f828acd57063">
+        <dex dex="/Users/recoilme/asp/android-DisplayingBitmaps/Application/build/intermediates/pre-dexed/debug/classes-aee3bbe839720194bce5adc66759c935ed08f7fd.jar" />
+    </item>
+    <item
+        jar="/Users/recoilme/asp/android-DisplayingBitmaps/Application/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/Users/recoilme/asp/android-DisplayingBitmaps/Application/build/intermediates/pre-dexed/debug/classes-a0d851e7b8c22b92e418e5d90e9e83b725199ef6.jar" />
     </item>
 
 </items>

@@ -39,7 +39,7 @@ public class ImageDetailFragment extends Fragment {
     private static final String IMAGE_DATA_EXTRA = "extra_image_data";
     private String mImageUrl;
     private ImageView mImageView;
-    private ImageFetcher mImageFetcher;
+    private Malevich malevich;
 
     /**
      * Factory method to generate a new instance of the fragment given an image number.
@@ -88,8 +88,8 @@ public class ImageDetailFragment extends Fragment {
         // Use the parent activity to load the image asynchronously into the ImageView (so a single
         // cache can be used over all pages in the ViewPager
         if (ImageDetailActivity.class.isInstance(getActivity())) {
-            mImageFetcher = ((ImageDetailActivity) getActivity()).getImageFetcher();
-            mImageFetcher.loadImage(mImageUrl, mImageView);
+            malevich = ((ImageDetailActivity) getActivity()).getMalevich();
+            malevich.loadImage(mImageUrl, mImageView);
         }
 
         // Pass clicks on the ImageView to the parent activity to handle
