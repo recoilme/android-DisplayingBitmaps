@@ -3,7 +3,16 @@ package org.freemp.malevich;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.ThumbnailUtils;
+import android.net.Uri;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -24,6 +33,23 @@ import java.net.URL;
  */
 public class Malevich extends ImageResizer{
 
+    /** Callbacks for Malevich events. */
+    public interface ErrorDecodingListener {
+
+        /**
+         * Invoked when an image has failed to load. This is useful for reporting image failures to a
+         * remote analytics service, for example.
+         */
+        void onImageDecodeError(Malevich malevich, String data, String error);
+    }
+
+    public interface ImageDecodedListener {
+        /**
+         * Invoked when an image has  load. This is useful for transformayion image
+         */
+        Bitmap onImageDecoded(Malevich malevich, String data,int reqWidth, int reqHeight, Bitmap bitmap);
+    }
+
     private static final String TAG = "Malevich";
     private static final String IMAGE_CACHE_DIR = "images";
     private static final String HTTP_CACHE_DIR = "http";
@@ -38,12 +64,14 @@ public class Malevich extends ImageResizer{
     private final File mHttpCacheDir;
     private final Object mHttpDiskCacheLock = new Object();
     private final Bitmap loadingImage;
+    private final ErrorDecodingListener errorDecodingListener;
 
     private DiskLruCache mHttpDiskCache;
     private boolean mHttpDiskCacheStarting = true;
     private Object data = null;
     private int reqWidth = 0;
     private int reqHeight = 0;
+    private ImageDecodedListener imageDecodedListener;
 
     public static class Builder {
         // required params
@@ -55,6 +83,7 @@ public class Malevich extends ImageResizer{
         // Set memory cache to 40% of app memory
         private float memCacheSizePercent = 0.4f;
         private Bitmap loadingImage;
+        private ErrorDecodingListener errorDecodingListener;
 
         public Builder (Context contextContainer) {
             if (contextContainer == null) {
@@ -117,6 +146,17 @@ public class Malevich extends ImageResizer{
             return this;
         }
 
+        /** Specify a listener for interesting events. */
+        public Builder globalListener(ErrorDecodingListener errorDecodingListener) {
+            if (errorDecodingListener == null) {
+                throw new IllegalArgumentException("Listener must not be null.");
+            }
+            if (this.errorDecodingListener != null) {
+                throw new IllegalStateException("Listener already set.");
+            }
+            this.errorDecodingListener = errorDecodingListener;
+            return this;
+        }
 
         public Malevich build() {
             return new Malevich(this);
@@ -132,6 +172,7 @@ public class Malevich extends ImageResizer{
         cacheParams = builder.cacheParams;
         mHttpCacheDir = ImageCache.getDiskCacheDir(context, HTTP_CACHE_DIR);
         loadingImage = builder.loadingImage;
+        errorDecodingListener = builder.errorDecodingListener;
 
         setLoadingImage(loadingImage);
         addImageCache(cacheParams, debug);
@@ -152,10 +193,15 @@ public class Malevich extends ImageResizer{
         return this;
     }
 
+    public Malevich imageDecodedListener(ImageDecodedListener imageDecodedListener) {
+        this.imageDecodedListener = imageDecodedListener;
+        return this;
+    }
+
     public void into (ImageView imageView) {
         reqWidth = reqWidth == 0 ? maxSize : reqWidth;
         reqHeight = reqHeight == 0 ? maxSize : reqHeight;
-        loadImage(data,imageView,reqWidth,reqHeight);
+        loadImage(data,imageView,reqWidth,reqHeight, imageDecodedListener);
     }
 
     public boolean isDebug() {
@@ -169,7 +215,7 @@ public class Malevich extends ImageResizer{
      * @param data The data to load the bitmap, in this case, a regular http URL
      * @return The downloaded and resized bitmap
      */
-    private Bitmap processBitmap(String data,int reqWidth, int reqHeight) {
+    private Bitmap processBitmap(String data,int reqWidth, int reqHeight, ImageDecodedListener imageDecodedListener) {
         if (debug) {
             Log.d(TAG, "processBitmap - " + data);
         }
@@ -178,13 +224,16 @@ public class Malevich extends ImageResizer{
         FileDescriptor fileDescriptor = null;
         FileInputStream fileInputStream = null;
         DiskLruCache.Snapshot snapshot;
+        StringBuffer error = new StringBuffer();
 
         synchronized (mHttpDiskCacheLock) {
             // Wait for disk cache to initialize
             while (mHttpDiskCacheStarting) {
                 try {
                     mHttpDiskCacheLock.wait();
-                } catch (InterruptedException e) {}
+                } catch (InterruptedException e) {
+                    error.append(e.toString());
+                }
             }
 
             if (mHttpDiskCache != null) {
@@ -201,10 +250,12 @@ public class Malevich extends ImageResizer{
                             }
                             DiskLruCache.Editor editor = mHttpDiskCache.edit(key);
                             if (editor != null) {
-                                if (downloadUrlToStream(data,
-                                        editor.newOutputStream(DISK_CACHE_INDEX))) {
+                                final String result = downloadUrlToStream(data,
+                                        editor.newOutputStream(DISK_CACHE_INDEX));
+                                if (result.equals("")) {
                                     editor.commit();
                                 } else {
+                                    error.append(result);
                                     editor.abort();
                                 }
                             }
@@ -218,8 +269,10 @@ public class Malevich extends ImageResizer{
                     }
                 } catch (IOException e) {
                     Log.e(TAG, "processBitmap - " + e);
+                    error.append(e.toString());
                 } catch (IllegalStateException e) {
                     Log.e(TAG, "processBitmap - " + e);
+                    error.append(e.toString());
                 } finally {
                     if (fileDescriptor == null && fileInputStream != null) {
                         try {
@@ -234,6 +287,15 @@ public class Malevich extends ImageResizer{
         if (fileDescriptor != null) {
             bitmap = decodeSampledBitmapFromDescriptor(fileDescriptor, reqWidth,
                     reqHeight, getImageCache());
+
+            if (imageDecodedListener != null) {
+                bitmap = imageDecodedListener.onImageDecoded(this, data, reqWidth, reqHeight, bitmap);
+            }
+        }
+        else {
+            if (errorDecodingListener != null) {
+                errorDecodingListener.onImageDecodeError(this, data, error.toString());
+            }
         }
         if (fileInputStream != null) {
             try {
@@ -244,8 +306,8 @@ public class Malevich extends ImageResizer{
     }
 
     @Override
-    protected Bitmap processBitmap(Object data, int reqWidth, int reqHeight) {
-        return processBitmap(String.valueOf(data),reqWidth,reqHeight);
+    protected Bitmap processBitmap(Object data, int reqWidth, int reqHeight, ImageDecodedListener imageDecodedListener) {
+        return processBitmap(String.valueOf(data),reqWidth,reqHeight, imageDecodedListener);
     }
 
     /**
@@ -254,12 +316,12 @@ public class Malevich extends ImageResizer{
      * @param urlString The URL to fetch
      * @return true if successful, false otherwise
      */
-    public boolean downloadUrlToStream(String urlString, OutputStream outputStream) {
+    public String downloadUrlToStream(String urlString, OutputStream outputStream) {
         disableConnectionReuseIfNecessary();
         HttpURLConnection urlConnection = null;
         BufferedOutputStream out = null;
         BufferedInputStream in = null;
-
+        String error = "";
         try {
             final URL url = new URL(urlString);
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -270,9 +332,10 @@ public class Malevich extends ImageResizer{
             while ((b = in.read()) != -1) {
                 out.write(b);
             }
-            return true;
+            return error;
         } catch (final IOException e) {
             Log.e(TAG, "Error in downloadBitmap - " + e);
+            error = "Error in downloadBitmap - " + e.toString();
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -286,7 +349,7 @@ public class Malevich extends ImageResizer{
                 }
             } catch (final IOException e) {}
         }
-        return false;
+        return error;
     }
 
     /**
@@ -384,4 +447,46 @@ public class Malevich extends ImageResizer{
         }
     }
 
+    // Some useful image utils
+
+    /**
+     * Creates a centered bitmap of the desired size.
+     *
+     * @param bitmap original bitmap source
+     * @param reqWidth targeted width
+     * @param reqHeight targeted height
+     */
+    public Bitmap extractThumbnail(Bitmap bitmap, int reqWidth, int reqHeight) {
+        return ThumbnailUtils.extractThumbnail(bitmap, reqWidth, reqHeight);
+    }
+
+    /**
+     * Creates a circle bitmap
+     *
+     * @param bitmap original bitmap source
+     */
+    public Bitmap getCircleBitmap(Bitmap bitmap) {
+        final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(output);
+
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final RectF rectF = new RectF(rect);
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        canvas.drawOval(rectF, paint);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+
+        bitmap.recycle();
+        return output;
+    }
+
+    // Get squared bitmap and transform it to circle
+    public Bitmap getRoundedBitmap(Bitmap bitmap,int reqWidth) {
+        return getCircleBitmap(extractThumbnail(bitmap,reqWidth,reqWidth));
+    }
 }

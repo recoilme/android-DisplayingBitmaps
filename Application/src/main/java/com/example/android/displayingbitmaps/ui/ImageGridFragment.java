@@ -20,6 +20,8 @@ import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.ThumbnailUtils;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -84,19 +86,17 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
 
         mAdapter = new ImageAdapter(getActivity(),((App) getActivity().getApplicationContext()).listOfAllImages);//Images.imageThumbUrls);
 
-        /*
-        ImageCache.ImageCacheParams cacheParams =
-                new ImageCache.ImageCacheParams(getActivity(), IMAGE_CACHE_DIR);
-
-        cacheParams.setMemCacheSizePercent(0.25f); // Set memory cache to 25% of app memory
-
-        // The ImageFetcher takes care of loading images into our ImageView children asynchronously
-        mImageFetcher = new ImageFetcher(getActivity(), mImageThumbSize,true);
-        mImageFetcher.setLoadingImage(R.drawable.empty_photo);
-        mImageFetcher.addImageCache(cacheParams,true);
-        */
-
-        malevich = new Malevich.Builder(getActivity()).cacheDir(IMAGE_CACHE_DIR).debug(true).build();
+        malevich = new Malevich.Builder(getActivity()).cacheDir(IMAGE_CACHE_DIR).debug(true).globalListener(new Malevich.ErrorDecodingListener() {
+            @Override
+            public void onImageDecodeError(Malevich malevich, String data, final String error) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity().getApplicationContext(),error,Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        }).build();
 
     }
 
@@ -317,7 +317,21 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
 
             // Finally load the image asynchronously into the ImageView, this also takes care of
             // setting a placeholder image while the background thread runs
-            malevich.load(data[position - mNumColumns]).width(mItemHeight).height(mItemHeight).into(imageView);
+            if ((position - mNumColumns) % 3 == 0) {
+                malevich.load(data[position - mNumColumns]).width(mItemHeight).height(mItemHeight).imageDecodedListener(new Malevich.ImageDecodedListener() {
+                    @Override
+                    public Bitmap onImageDecoded(Malevich malevich, String data, int reqWidth, int reqHeight, Bitmap bitmap) {
+
+                        // Get squared bitmap and transform it to circle
+                        return malevich.getRoundedBitmap(bitmap,reqWidth);
+                    }
+                }).into(imageView);
+            }
+            else {
+                malevich.load(data[position - mNumColumns]).width(mItemHeight).height(mItemHeight).imageDecodedListener(null).into(imageView);
+            }
+
+
             return imageView;
             //END_INCLUDE(load_gridview_item)
         }

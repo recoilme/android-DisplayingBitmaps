@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.os.Build;
 import android.util.Log;
 
@@ -57,8 +58,8 @@ public class ImageResizer extends ImageWorker {
     }
 
     @Override
-    protected Bitmap processBitmap(Object data,int reqWidth, int reqHeight) {
-        return processBitmap(Integer.parseInt(String.valueOf(data)), reqWidth, reqHeight);
+    protected Bitmap processBitmap(Object data,int reqWidth, int reqHeight, Malevich.ImageDecodedListener imageDecodedListener) {
+        return processBitmap(Integer.parseInt(String.valueOf(data)), reqWidth, reqHeight, imageDecodedListener);
     }
 
     /**
@@ -196,7 +197,7 @@ public class ImageResizer extends ImageWorker {
         final int width = options.outWidth;
 
         int inSampleSize = 1;
-        //take 2/3 required size, is it dirty?
+        //take 2/3 required size, for optimal memory usage, is it dirty?
         reqHeight = (int) (reqHeight * 0.6f);
         reqWidth = (int) (reqWidth * 0.6f);
         if (height > reqHeight || width > reqWidth) {

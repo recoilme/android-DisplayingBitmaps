@@ -88,6 +88,7 @@ public class ImageDetailFragment extends Fragment {
         // cache can be used over all pages in the ViewPager
         if (ImageDetailActivity.class.isInstance(getActivity())) {
             malevich = ((ImageDetailActivity) getActivity()).getMalevich();
+
             malevich.load(mImageUrl).into(mImageView);
         }
 

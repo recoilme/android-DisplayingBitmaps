@@ -70,7 +70,7 @@ public abstract class ImageWorker {
      * @param data The URL of the image to download.
      * @param imageView The ImageView to bind the downloaded image to.
      */
-    public void loadImage(Object data, ImageView imageView, int reqWidth, int reqHeight) {
+    public void loadImage(Object data, ImageView imageView, int reqWidth, int reqHeight, Malevich.ImageDecodedListener imageDecodedListener) {
         if (data == null) {
             return;
         }
@@ -79,26 +79,29 @@ public abstract class ImageWorker {
 
         if (mImageCache != null) {
 
-            value = mImageCache.getBitmapFromMemCache(String.valueOf(data));
+            value = mImageCache.getBitmapFromMemCache(String.valueOf(data)+"#width"+reqWidth+"#height"+reqHeight);
         }
 
         if (value != null) {
             // Bitmap found in memory cache
             imageView.setImageDrawable(value);
-        } else if (cancelPotentialWork(data, imageView)) {
-            //BEGIN_INCLUDE(execute_background_task)
-            final BitmapWorkerTask task = new BitmapWorkerTask(data, imageView, reqWidth, reqHeight);
-            final AsyncDrawable asyncDrawable =
-                    new AsyncDrawable(mResources, mLoadingBitmap, task);
-            imageView.setImageDrawable(asyncDrawable);
+        } else {
+            if (cancelPotentialWork(data, imageView)) {
+                //BEGIN_INCLUDE(execute_background_task)
+                final BitmapWorkerTask task = new BitmapWorkerTask(data, imageView, reqWidth, reqHeight, imageDecodedListener);
+                final AsyncDrawable asyncDrawable =
+                        new AsyncDrawable(mResources, mLoadingBitmap, task);
+                imageView.setImageDrawable(asyncDrawable);
 
-            // NOTE: This uses a custom version of AsyncTask that has been pulled from the
-            // framework and slightly modified. Refer to the docs at the top of the class
-            // for more info on what was changed.
-            task.executeOnExecutor(AsyncTask.DUAL_THREAD_EXECUTOR);
-            //END_INCLUDE(execute_background_task)
+                // NOTE: This uses a custom version of AsyncTask that has been pulled from the
+                // framework and slightly modified. Refer to the docs at the top of the class
+                // for more info on what was changed.
+                task.executeOnExecutor(AsyncTask.DUAL_THREAD_EXECUTOR);
+                //END_INCLUDE(execute_background_task)
+            }
         }
     }
+
 
     /**
      * Set placeholder bitmap that shows when the the background thread is running.
@@ -165,7 +168,7 @@ public abstract class ImageWorker {
      *            {@link ImageWorker#loadImage(Object, android.widget.ImageView)}
      * @return The processed bitmap
      */
-    protected abstract Bitmap processBitmap(Object data,int reqWidth, int reqHeight);
+    protected abstract Bitmap processBitmap(Object data,int reqWidth, int reqHeight, Malevich.ImageDecodedListener imageDecodedListener);
 
     /**
      * @return The {@link ImageCache} object currently being used by this ImageWorker.
@@ -238,12 +241,14 @@ public abstract class ImageWorker {
         private Object mData;
         private int reqWidth;
         private int reqHeight;
+        private Malevich.ImageDecodedListener imageDecodedListener;
         private final WeakReference<ImageView> imageViewReference;
 
-        public BitmapWorkerTask(Object data, ImageView imageView, int reqWidth, int reqHeight) {
+        public BitmapWorkerTask(Object data, ImageView imageView, int reqWidth, int reqHeight, Malevich.ImageDecodedListener imageDecodedListener) {
             mData = data;
             this.reqWidth = reqWidth;
             this.reqHeight = reqHeight;
+            this.imageDecodedListener = imageDecodedListener;
             imageViewReference = new WeakReference<ImageView>(imageView);
         }
 
@@ -257,7 +262,7 @@ public abstract class ImageWorker {
                 Log.d(TAG, "doInBackground - starting work");
             }
 
-            final String dataString = String.valueOf(mData);
+            final String dataString = String.valueOf(mData)+"#width"+reqWidth+"#height"+reqHeight;
             Bitmap bitmap = null;
             BitmapDrawable drawable = null;
 
@@ -285,7 +290,7 @@ public abstract class ImageWorker {
             // process method (as implemented by a subclass)
             if (bitmap == null && !isCancelled() && getAttachedImageView() != null
                     && !mExitTasksEarly) {
-                bitmap = processBitmap(mData, reqWidth, reqHeight);
+                bitmap = processBitmap(mData, reqWidth, reqHeight, imageDecodedListener);
             }
 
             // If the bitmap was processed and the image cache is available, then add the processed
