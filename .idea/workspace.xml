@@ -11,7 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90a71790-b993-496a-9e02-d55927ccf0c7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/displayingbitmaps/App.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/displayingbitmaps/App.class" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageFetcher.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/build/outputs/apk/Application-debug-unaligned.apk" afterPath="$PROJECT_DIR$/Application/build/outputs/apk/Application-debug-unaligned.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/build/outputs/apk/Application-debug.apk" afterPath="$PROJECT_DIR$/Application/build/outputs/apk/Application-debug.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/displayingbitmaps/ui/ImageDetailActivity$1.class" afterPath="$PROJECT_DIR$/Application/build/intermediates/classes/debug/com/example/android/displayingbitmaps/ui/ImageDetailActivity$1.class" />
@@ -29,14 +29,12 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/App.java" afterPath="$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/App.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/ui/ImageDetailActivity.java" afterPath="$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/ui/ImageDetailActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/ui/ImageDetailFragment.java" afterPath="$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/ui/ImageDetailFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/ui/ImageGridFragment.java" afterPath="$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/ui/ImageGridFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/Malevich.java" afterPath="$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/Malevich.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_22_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_22_2_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageResizer.java" afterPath="$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageResizer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageWorker.java" afterPath="$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageWorker.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_22_2_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_22_2_0.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="android-DisplayingBitmaps.iws" />
@@ -68,8 +66,8 @@
       <file leaf-file-name="ImageCache.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageCache.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.0740743">
-              <caret line="123" column="43" selection-start-line="123" selection-start-column="25" selection-end-line="123" selection-end-column="43" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="293" column="31" selection-start-line="293" selection-start-column="31" selection-end-line="293" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -80,8 +78,8 @@
       <file leaf-file-name="ImageDetailActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/ui/ImageDetailActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-15.518518">
-              <caret line="78" column="46" selection-start-line="78" selection-start-column="45" selection-end-line="78" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="76" column="46" selection-start-line="76" selection-start-column="45" selection-end-line="76" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -91,7 +89,7 @@
         <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/ui/ImageDetailFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="91" column="20" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
+              <caret line="90" column="25" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -100,26 +98,8 @@
       <file leaf-file-name="Malevich.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/Malevich.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.814815">
-              <caret line="81" column="27" selection-start-line="81" selection-start-column="27" selection-end-line="81" selection-end-column="27" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4356#4357#0" expanded="true" />
-                <element signature="e#4405#4406#0" expanded="true" />
-                <element signature="e#4908#4909#0" expanded="true" />
-                <element signature="e#4936#4937#0" expanded="true" />
-                <element signature="e#8249#8250#0" expanded="true" />
-                <element signature="e#8307#8308#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ImageFetcher.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageFetcher.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.148149">
-              <caret line="245" column="36" selection-start-line="245" selection-start-column="36" selection-end-line="245" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="323" column="0" selection-start-line="323" selection-start-column="0" selection-end-line="323" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -130,14 +110,24 @@
       <file leaf-file-name="ImageWorker.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageWorker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.4814816">
-              <caret line="58" column="43" selection-start-line="58" selection-start-column="21" selection-end-line="58" selection-end-column="43" />
+            <state vertical-scroll-proportion="-110.296295">
+              <caret line="274" column="37" selection-start-line="274" selection-start-column="37" selection-end-line="274" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4153#4154#0" expanded="true" />
-                <element signature="e#4192#4193#0" expanded="true" />
-                <element signature="e#5706#5707#0" expanded="true" />
-                <element signature="e#5744#5745#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AsyncTask.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/AsyncTask.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="259" column="0" selection-start-line="259" selection-start-column="0" selection-end-line="259" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#11809#12046#0" expanded="true" />
+                <element signature="e#12045#12046#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -153,15 +143,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImageGridFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ImageGridFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/ui/ImageGridFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3206522">
-              <caret line="202" column="16" selection-start-line="202" selection-start-column="16" selection-end-line="202" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="337" column="27" selection-start-line="337" selection-start-column="27" selection-end-line="337" selection-end-column="27" />
               <folding>
-                <element signature="e#5724#7198#0" expanded="true" />
-                <element signature="e#7197#7198#0" expanded="true" />
-                <element signature="e#8854#8889#0" expanded="true" />
+                <element signature="e#5552#7026#0" expanded="true" />
+                <element signature="e#7025#7026#0" expanded="true" />
+                <element signature="e#11018#11019#0" expanded="true" />
+                <element signature="e#11081#11082#0" expanded="true" />
+                <element signature="e#11140#11141#0" expanded="true" />
+                <element signature="e#11175#11176#0" expanded="true" />
+                <element signature="e#13452#13453#0" expanded="true" />
+                <element signature="e#13500#13501#0" expanded="true" />
+                <element signature="e#13538#13539#0" expanded="true" />
+                <element signature="e#13580#13581#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImageResizer.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageResizer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.25">
+              <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2567#2568#0" expanded="true" />
+                <element signature="e#2614#2615#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -172,16 +183,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="24" column="51" selection-start-line="24" selection-start-column="51" selection-end-line="24" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Images.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/provider/Images.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="32" column="33" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -2213,13 +2214,13 @@
         <option value="$PROJECT_DIR$/displayingbitmaps/build.gradle" />
         <option value="$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageCache.java" />
         <option value="$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageFetcher.java" />
-        <option value="$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageResizer.java" />
-        <option value="$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageWorker.java" />
         <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/ui/ImageDetailFragment.java" />
         <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/App.java" />
         <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/ui/ImageDetailActivity.java" />
         <option value="$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/Malevich.java" />
         <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/ui/ImageGridFragment.java" />
+        <option value="$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageWorker.java" />
+        <option value="$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageResizer.java" />
       </list>
     </option>
   </component>
@@ -2273,8 +2274,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2731,21 +2732,21 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1873" height="1020" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16482301" sideWeight="0.48334244" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16482301" sideWeight="0.47678864" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2931416" sideWeight="0.7695249" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35840708" sideWeight="0.24740578" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2931416" sideWeight="0.7662479" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16482301" sideWeight="0.52321136" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32964602" sideWeight="0.48498088" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35840708" sideWeight="0.75259423" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28761062" sideWeight="0.7460404" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32964602" sideWeight="0.49590388" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2777,25 +2778,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageFetcher.java</url>
-          <line>183</line>
-          <properties />
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/Malevich.java</url>
           <line>307</line>
           <properties />
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageCache.java</url>
-          <line>544</line>
+          <url>file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageWorker.java</url>
+          <line>73</line>
           <properties />
-          <option name="timeStamp" value="52" />
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="53" />
+      <option name="time" value="55" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2811,7 +2806,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2831,6 +2825,8 @@
           <caret line="326" column="20" selection-start-line="326" selection-start-column="20" selection-end-line="326" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#11809#12046#0" expanded="true" />
+            <element signature="e#12045#12046#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2857,23 +2853,23 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/res/layout/image_grid_fragment.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/res/layout/image_detail_pager.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/common/logger/Log.java">
@@ -2947,13 +2943,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/res/layout/image_detail_fragment.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.68476355">
           <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
         </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/tests/AndroidManifest.xml">
@@ -2971,10 +2967,10 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/res/drawable-hdpi/tile.9.png">
-      <provider selected="true" editor-type-id="ninepatcheditor">
+      <provider editor-type-id="images">
         <state />
       </provider>
-      <provider editor-type-id="images">
+      <provider selected="true" editor-type-id="ninepatcheditor">
         <state />
       </provider>
     </entry>
@@ -3020,7 +3016,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="26" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3056,7 +3051,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3091,7 +3085,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="25" column="53" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3099,7 +3092,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33275563">
           <caret line="340" column="32" selection-start-line="340" selection-start-column="32" selection-end-line="340" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3107,10 +3099,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="29" column="58" selection-start-line="29" selection-start-column="58" selection-end-line="29" selection-end-column="58" />
-          <folding>
-            <element signature="e#0#1319#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3118,17 +3106,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="2346" column="0" selection-start-line="2346" selection-start-column="0" selection-end-line="2346" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/AsyncTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="255" column="0" selection-start-line="255" selection-start-column="0" selection-end-line="255" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3137,18 +3114,6 @@
         <state vertical-scroll-proportion="0.068359375">
           <caret line="665" column="25" selection-start-line="665" selection-start-column="25" selection-end-line="665" selection-end-column="25" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageResizer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="204" column="41" selection-start-line="204" selection-start-column="41" selection-end-line="204" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2567#2568#0" expanded="true" />
-            <element signature="e#2614#2615#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3168,34 +3133,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageFetcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.148149">
-          <caret line="245" column="36" selection-start-line="245" selection-start-column="36" selection-end-line="245" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/ui/ImageDetailFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="91" column="20" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageCache.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.0740743">
-          <caret line="123" column="43" selection-start-line="123" selection-start-column="25" selection-end-line="123" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/ui/ImageGridActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3204,52 +3141,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageWorker.java">
+    <entry file="file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/Malevich.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.4814816">
-          <caret line="58" column="43" selection-start-line="58" selection-start-column="21" selection-end-line="58" selection-end-column="43" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="323" column="0" selection-start-line="323" selection-start-column="0" selection-end-line="323" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4153#4154#0" expanded="true" />
-            <element signature="e#4192#4193#0" expanded="true" />
-            <element signature="e#5706#5707#0" expanded="true" />
-            <element signature="e#5744#5745#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/Malevich.java">
+    <entry file="file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/AsyncTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.814815">
-          <caret line="81" column="27" selection-start-line="81" selection-start-column="27" selection-end-line="81" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="259" column="0" selection-start-line="259" selection-start-column="0" selection-end-line="259" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4356#4357#0" expanded="true" />
-            <element signature="e#4405#4406#0" expanded="true" />
-            <element signature="e#4908#4909#0" expanded="true" />
-            <element signature="e#4936#4937#0" expanded="true" />
-            <element signature="e#8249#8250#0" expanded="true" />
-            <element signature="e#8307#8308#0" expanded="true" />
+            <element signature="e#11809#12046#0" expanded="true" />
+            <element signature="e#12045#12046#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/ui/ImageDetailActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.518518">
-          <caret line="78" column="46" selection-start-line="78" selection-start-column="45" selection-end-line="78" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="76" column="46" selection-start-line="76" selection-start-column="45" selection-end-line="76" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/ui/ImageDetailFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="90" column="25" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/displayingbitmaps/ui/ImageGridFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3206522">
-          <caret line="202" column="16" selection-start-line="202" selection-start-column="16" selection-end-line="202" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="337" column="27" selection-start-line="337" selection-start-column="27" selection-end-line="337" selection-end-column="27" />
           <folding>
-            <element signature="e#5724#7198#0" expanded="true" />
-            <element signature="e#7197#7198#0" expanded="true" />
-            <element signature="e#8854#8889#0" expanded="true" />
+            <element signature="e#5552#7026#0" expanded="true" />
+            <element signature="e#7025#7026#0" expanded="true" />
+            <element signature="e#11018#11019#0" expanded="true" />
+            <element signature="e#11081#11082#0" expanded="true" />
+            <element signature="e#11140#11141#0" expanded="true" />
+            <element signature="e#11175#11176#0" expanded="true" />
+            <element signature="e#13452#13453#0" expanded="true" />
+            <element signature="e#13500#13501#0" expanded="true" />
+            <element signature="e#13538#13539#0" expanded="true" />
+            <element signature="e#13580#13581#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageCache.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="293" column="31" selection-start-line="293" selection-start-column="31" selection-end-line="293" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageWorker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-110.296295">
+          <caret line="274" column="37" selection-start-line="274" selection-start-column="37" selection-end-line="274" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/displayingbitmaps/src/main/java/org/freemp/malevich/ImageResizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25">
+          <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2567#2568#0" expanded="true" />
+            <element signature="e#2614#2615#0" expanded="true" />
           </folding>
         </state>
       </provider>

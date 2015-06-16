@@ -257,7 +257,7 @@ public class ImageResizer extends ImageWorker {
                     && (halfWidth / inSampleSize) > reqWidth) {
                 inSampleSize *= 2;
             }
-            // То что написано ниже - бред, Romain
+            // wtf, Romain?
 
             // This offers some additional logic in case the image has a strange
             // aspect ratio. For example, a panorama may have a much larger

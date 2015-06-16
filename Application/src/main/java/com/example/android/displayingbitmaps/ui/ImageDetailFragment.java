@@ -27,7 +27,6 @@ import android.widget.ImageView;
 
 import com.example.android.displayingbitmaps.R;
 
-import org.freemp.malevich.ImageFetcher;
 import org.freemp.malevich.ImageWorker;
 import org.freemp.malevich.Malevich;
 import org.freemp.malevich.Utils;

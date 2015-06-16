@@ -37,8 +37,6 @@ import android.widget.Toast;
 import com.example.android.displayingbitmaps.App;
 import com.example.android.displayingbitmaps.R;
 
-import org.freemp.malevich.ImageCache;
-import org.freemp.malevich.ImageFetcher;
 import org.freemp.malevich.Malevich;
 import org.freemp.malevich.Utils;
 

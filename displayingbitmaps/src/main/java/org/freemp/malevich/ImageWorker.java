@@ -78,6 +78,7 @@ public abstract class ImageWorker {
         BitmapDrawable value = null;
 
         if (mImageCache != null) {
+
             value = mImageCache.getBitmapFromMemCache(String.valueOf(data));
         }
 

@@ -46,8 +46,6 @@ import com.example.android.displayingbitmaps.R;
 
 import java.util.ArrayList;
 
-import org.freemp.malevich.ImageCache;
-import org.freemp.malevich.ImageFetcher;
 import org.freemp.malevich.Malevich;
 import org.freemp.malevich.Utils;
 
@@ -115,10 +113,8 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
             public void onScrollStateChanged(AbsListView absListView, int scrollState) {
                 // Pause fetcher to ensure smoother scrolling when flinging
                 if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
-                    // Before Honeycomb pause image loading on scroll to help with performance
-                    if (!Utils.hasHoneycomb()) {
-                        malevich.setPauseWork(true);
-                    }
+                    // Pause image loading on scroll to help with performance
+                    malevich.setPauseWork(true);
                 } else {
                     malevich.setPauseWork(false);
                 }
