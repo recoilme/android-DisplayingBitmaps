@@ -41,6 +41,9 @@ public class Malevich extends ImageResizer{
 
     private DiskLruCache mHttpDiskCache;
     private boolean mHttpDiskCacheStarting = true;
+    private Object data = null;
+    private int reqWidth = 0;
+    private int reqHeight = 0;
 
     public static class Builder {
         // required params
@@ -134,6 +137,27 @@ public class Malevich extends ImageResizer{
         addImageCache(cacheParams, debug);
     }
 
+    public Malevich load (Object data) {
+        this.data = data;
+        return this;
+    }
+
+    public Malevich width (int reqWidth) {
+        this.reqWidth = reqWidth;
+        return this;
+    }
+
+    public Malevich height (int reqHeight) {
+        this.reqHeight = reqHeight;
+        return this;
+    }
+
+    public void into (ImageView imageView) {
+        reqWidth = reqWidth == 0 ? maxSize : reqWidth;
+        reqHeight = reqHeight == 0 ? maxSize : reqHeight;
+        loadImage(data,imageView,reqWidth,reqHeight);
+    }
+
     public boolean isDebug() {
         return debug;
     }
@@ -145,7 +169,7 @@ public class Malevich extends ImageResizer{
      * @param data The data to load the bitmap, in this case, a regular http URL
      * @return The downloaded and resized bitmap
      */
-    private Bitmap processBitmap(String data) {
+    private Bitmap processBitmap(String data,int reqWidth, int reqHeight) {
         if (debug) {
             Log.d(TAG, "processBitmap - " + data);
         }
@@ -208,8 +232,8 @@ public class Malevich extends ImageResizer{
 
         Bitmap bitmap = null;
         if (fileDescriptor != null) {
-            bitmap = decodeSampledBitmapFromDescriptor(fileDescriptor, mImageWidth,
-                    mImageHeight, getImageCache());
+            bitmap = decodeSampledBitmapFromDescriptor(fileDescriptor, reqWidth,
+                    reqHeight, getImageCache());
         }
         if (fileInputStream != null) {
             try {
@@ -220,8 +244,8 @@ public class Malevich extends ImageResizer{
     }
 
     @Override
-    protected Bitmap processBitmap(Object data) {
-        return processBitmap(String.valueOf(data));
+    protected Bitmap processBitmap(Object data, int reqWidth, int reqHeight) {
+        return processBitmap(String.valueOf(data),reqWidth,reqHeight);
     }
 
     /**

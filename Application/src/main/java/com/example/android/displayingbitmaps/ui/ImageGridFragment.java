@@ -317,7 +317,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
 
             // Finally load the image asynchronously into the ImageView, this also takes care of
             // setting a placeholder image while the background thread runs
-            malevich.loadImage(data[position - mNumColumns], imageView);
+            malevich.load(data[position - mNumColumns]).width(mItemHeight).height(mItemHeight).into(imageView);
             return imageView;
             //END_INCLUDE(load_gridview_item)
         }
@@ -335,7 +335,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
             mItemHeight = height;
             mImageViewLayoutParams =
                     new GridView.LayoutParams(LayoutParams.MATCH_PARENT, mItemHeight);
-            malevich.setImageSize(height,true);
+            //malevich.setImageSize(height,true);
             notifyDataSetChanged();
         }
 

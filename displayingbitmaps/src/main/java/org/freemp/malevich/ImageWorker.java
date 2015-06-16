@@ -70,7 +70,7 @@ public abstract class ImageWorker {
      * @param data The URL of the image to download.
      * @param imageView The ImageView to bind the downloaded image to.
      */
-    public void loadImage(Object data, ImageView imageView) {
+    public void loadImage(Object data, ImageView imageView, int reqWidth, int reqHeight) {
         if (data == null) {
             return;
         }
@@ -87,7 +87,7 @@ public abstract class ImageWorker {
             imageView.setImageDrawable(value);
         } else if (cancelPotentialWork(data, imageView)) {
             //BEGIN_INCLUDE(execute_background_task)
-            final BitmapWorkerTask task = new BitmapWorkerTask(data, imageView);
+            final BitmapWorkerTask task = new BitmapWorkerTask(data, imageView, reqWidth, reqHeight);
             final AsyncDrawable asyncDrawable =
                     new AsyncDrawable(mResources, mLoadingBitmap, task);
             imageView.setImageDrawable(asyncDrawable);
@@ -165,7 +165,7 @@ public abstract class ImageWorker {
      *            {@link ImageWorker#loadImage(Object, android.widget.ImageView)}
      * @return The processed bitmap
      */
-    protected abstract Bitmap processBitmap(Object data);
+    protected abstract Bitmap processBitmap(Object data,int reqWidth, int reqHeight);
 
     /**
      * @return The {@link ImageCache} object currently being used by this ImageWorker.
@@ -236,10 +236,14 @@ public abstract class ImageWorker {
      */
     private class BitmapWorkerTask extends AsyncTask<Void, Void, BitmapDrawable> {
         private Object mData;
+        private int reqWidth;
+        private int reqHeight;
         private final WeakReference<ImageView> imageViewReference;
 
-        public BitmapWorkerTask(Object data, ImageView imageView) {
+        public BitmapWorkerTask(Object data, ImageView imageView, int reqWidth, int reqHeight) {
             mData = data;
+            this.reqWidth = reqWidth;
+            this.reqHeight = reqHeight;
             imageViewReference = new WeakReference<ImageView>(imageView);
         }
 
@@ -281,7 +285,7 @@ public abstract class ImageWorker {
             // process method (as implemented by a subclass)
             if (bitmap == null && !isCancelled() && getAttachedImageView() != null
                     && !mExitTasksEarly) {
-                bitmap = processBitmap(mData);
+                bitmap = processBitmap(mData, reqWidth, reqHeight);
             }
 
             // If the bitmap was processed and the image cache is available, then add the processed
@@ -383,7 +387,7 @@ public abstract class ImageWorker {
             // Transition drawable with a transparent drawable and the final drawable
             final TransitionDrawable td =
                     new TransitionDrawable(new Drawable[] {
-                            new ColorDrawable(android.R.color.transparent),
+                            new ColorDrawable(0x00000000),
                             drawable
                     });
             // Set background to loading bitmap

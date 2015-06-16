@@ -34,58 +34,11 @@ import java.io.FileDescriptor;
  * memory.
  */
 public class ImageResizer extends ImageWorker {
-    private static final String TAG = "ImageResizer";
-    protected int mImageWidth;
-    protected int mImageHeight;
+    private static final String TAG = "Malevich: ImageResizer";
     protected boolean debug;
-
-    /**
-     * Initialize providing a single target image size (used for both width and height);
-     *
-     * @param context
-     * @param imageWidth
-     * @param imageHeight
-     */
-    public ImageResizer(Context context, int imageWidth, int imageHeight, boolean debug) {
-        super(context,debug);
-        setImageSize(imageWidth, imageHeight, debug);
-    }
-
-    /**
-     * Initialize providing a single target image size (used for both width and height);
-     *
-     * @param context
-     * @param imageSize
-     */
-    public ImageResizer(Context context, int imageSize, boolean debug) {
-        super(context,debug);
-        setImageSize(imageSize, debug);
-    }
 
     public ImageResizer(Context context, boolean debug) {
         super(context, debug);
-        setImageSize(0, debug);
-    }
-
-    /**
-     * Set the target image width and height.
-     *
-     * @param width
-     * @param height
-     */
-    public void setImageSize(int width, int height, boolean debug) {
-        mImageWidth = width;
-        mImageHeight = height;
-        this.debug = debug;
-    }
-
-    /**
-     * Set the target image size (width and height will be the same).
-     *
-     * @param size
-     */
-    public void setImageSize(int size, boolean debug) {
-        setImageSize(size, size, debug);
     }
 
     /**
@@ -95,17 +48,17 @@ public class ImageResizer extends ImageWorker {
      * @param resId
      * @return
      */
-    private Bitmap processBitmap(int resId) {
+    private Bitmap processBitmap(int resId, int reqWidth, int reqHeight) {
         if (debug) {
             Log.d(TAG, "processBitmap - " + resId);
         }
-        return decodeSampledBitmapFromResource(mResources, resId, mImageWidth,
-                mImageHeight, getImageCache());
+        return decodeSampledBitmapFromResource(mResources, resId, reqWidth,
+                reqHeight, getImageCache());
     }
 
     @Override
-    protected Bitmap processBitmap(Object data) {
-        return processBitmap(Integer.parseInt(String.valueOf(data)));
+    protected Bitmap processBitmap(Object data,int reqWidth, int reqHeight) {
+        return processBitmap(Integer.parseInt(String.valueOf(data)), reqWidth, reqHeight);
     }
 
     /**
@@ -243,7 +196,7 @@ public class ImageResizer extends ImageWorker {
         final int width = options.outWidth;
 
         int inSampleSize = 1;
-        //take 2/3 required size
+        //take 2/3 required size, is it dirty?
         reqHeight = (int) (reqHeight * 0.6f);
         reqWidth = (int) (reqWidth * 0.6f);
         if (height > reqHeight || width > reqWidth) {

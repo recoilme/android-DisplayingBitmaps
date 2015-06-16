@@ -88,7 +88,7 @@ public class ImageDetailFragment extends Fragment {
         // cache can be used over all pages in the ViewPager
         if (ImageDetailActivity.class.isInstance(getActivity())) {
             malevich = ((ImageDetailActivity) getActivity()).getMalevich();
-            malevich.loadImage(mImageUrl, mImageView);
+            malevich.load(mImageUrl).into(mImageView);
         }
 
         // Pass clicks on the ImageView to the parent activity to handle
@@ -102,7 +102,7 @@ public class ImageDetailFragment extends Fragment {
         super.onDestroy();
         if (mImageView != null) {
             // Cancel any pending image work
-            ImageWorker.cancelWork(mImageView);
+            malevich.cancelWork(mImageView);
             mImageView.setImageDrawable(null);
         }
     }
