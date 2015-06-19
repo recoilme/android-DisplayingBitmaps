@@ -26,10 +26,7 @@ import android.widget.ImageView;
 
 
 import com.example.android.displayingbitmaps.R;
-
-import org.freemp.malevich.ImageWorker;
 import org.freemp.malevich.Malevich;
-import org.freemp.malevich.Utils;
 
 /**
  * This fragment will populate the children of the ViewPager from {@link ImageDetailActivity}.
@@ -93,7 +90,7 @@ public class ImageDetailFragment extends Fragment {
         }
 
         // Pass clicks on the ImageView to the parent activity to handle
-        if (OnClickListener.class.isInstance(getActivity()) && Utils.hasHoneycomb()) {
+        if (OnClickListener.class.isInstance(getActivity()) && Malevich.Utils.hasHoneycomb()) {
             mImageView.setOnClickListener((OnClickListener) getActivity());
         }
     }

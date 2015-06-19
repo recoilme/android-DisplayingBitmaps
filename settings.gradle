@@ -1,2 +1,1 @@
-include ':displayingbitmaps'
 include 'Application'

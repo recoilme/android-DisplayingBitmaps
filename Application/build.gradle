@@ -6,7 +6,6 @@ repositories {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
-    compile project(':displayingbitmaps')
 }
 
 // The sample build uses multiple directories to
@@ -42,7 +41,9 @@ android {
         androidTest.java.srcDirs = ['tests/src']
 
     }
-
+    dependencies {
+        compile fileTree(include: ['*.jar'], dir: 'libs')
+    }
 }
 
 

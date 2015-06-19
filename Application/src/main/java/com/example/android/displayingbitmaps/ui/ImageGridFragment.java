@@ -21,7 +21,6 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.ThumbnailUtils;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -49,7 +48,6 @@ import com.example.android.displayingbitmaps.R;
 import java.util.ArrayList;
 
 import org.freemp.malevich.Malevich;
-import org.freemp.malevich.Utils;
 
 /**
  * The main fragment that powers the ImageGridActivity screen. Fairly straight forward GridView
@@ -86,7 +84,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
 
         mAdapter = new ImageAdapter(getActivity(),((App) getActivity().getApplicationContext()).listOfAllImages);//Images.imageThumbUrls);
 
-        malevich = new Malevich.Builder(getActivity()).cacheDir(IMAGE_CACHE_DIR).debug(true).globalListener(new Malevich.ErrorDecodingListener() {
+        malevich = new Malevich.Builder(getActivity()).debug(true).globalListener(new Malevich.ErrorDecodingListener() {
             @Override
             public void onImageDecodeError(Malevich malevich, String data, final String error) {
                 getActivity().runOnUiThread(new Runnable() {
@@ -148,7 +146,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
                                 if (BuildConfig.DEBUG) {
                                     Log.d(TAG, "onCreateView - numColumns set to " + numColumns);
                                 }
-                                if (Utils.hasJellyBean()) {
+                                if (Malevich.Utils.hasJellyBean()) {
                                     mGridView.getViewTreeObserver()
                                             .removeOnGlobalLayoutListener(this);
                                 } else {
@@ -189,7 +187,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
     public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
         final Intent i = new Intent(getActivity(), ImageDetailActivity.class);
         i.putExtra(ImageDetailActivity.EXTRA_IMAGE, (int) id);
-        if (Utils.hasJellyBean()) {
+        if (Malevich.Utils.hasJellyBean()) {
             // makeThumbnailScaleUpAnimation() looks kind of ugly here as the loading spinner may
             // show plus the thumbnail image in GridView is cropped. so using
             // makeScaleUpAnimation() instead.
@@ -320,10 +318,10 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
             if ((position - mNumColumns) % 3 == 0) {
                 malevich.load(data[position - mNumColumns]).width(mItemHeight).height(mItemHeight).imageDecodedListener(new Malevich.ImageDecodedListener() {
                     @Override
-                    public Bitmap onImageDecoded(Malevich malevich, String data, int reqWidth, int reqHeight, Bitmap bitmap) {
+                    public Bitmap onImageDecoded(String data, int reqWidth, int reqHeight, Bitmap bitmap) {
 
                         // Get squared bitmap and transform it to circle
-                        return malevich.getRoundedBitmap(bitmap,reqWidth);
+                        return Malevich.Utils.getSquaredCircleBitmap(bitmap,reqWidth);
                     }
                 }).into(imageView);
             }

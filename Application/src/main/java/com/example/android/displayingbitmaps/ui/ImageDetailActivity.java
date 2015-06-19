@@ -38,7 +38,6 @@ import com.example.android.displayingbitmaps.App;
 import com.example.android.displayingbitmaps.R;
 
 import org.freemp.malevich.Malevich;
-import org.freemp.malevich.Utils;
 
 public class ImageDetailActivity extends FragmentActivity implements OnClickListener {
     private static final String IMAGE_CACHE_DIR = "images";
@@ -74,7 +73,7 @@ public class ImageDetailActivity extends FragmentActivity implements OnClickList
         //cacheParams.setMemCacheSizePercent(0.5f); // Set memory cache to 50% of app memory
 
         // The ImageFetcher takes care of loading images into our ImageView children asynchronously
-        malevich = new Malevich.Builder(this).cacheDir(IMAGE_CACHE_DIR).build();
+        malevich = new Malevich.Builder(this).build();
         //mImageFetcher = new ImageFetcher(this, longest,true);
         //mImageFetcher.addImageCache(cacheParams,true);
         //mImageFetcher.setImageFadeIn(false);
@@ -92,7 +91,7 @@ public class ImageDetailActivity extends FragmentActivity implements OnClickList
 
         // Enable some additional newer visibility and ActionBar features to create a more
         // immersive photo viewing experience
-        if (Utils.hasHoneycomb()) {
+        if (Malevich.Utils.hasHoneycomb()) {
             final ActionBar actionBar = getActionBar();
 
             // Hide title text and set home as up
